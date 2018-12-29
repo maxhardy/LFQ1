@@ -4,8 +4,7 @@
 using namespace std;
 
 template<class T>
-struct Node
-{
+struct Node {
     T value;
     std::atomic<Node*> next;
     Node(T value): value(value), next(nullptr) { }
@@ -13,26 +12,20 @@ struct Node
 };
 
 template<class T>
-class LockFreeQueue
-{
-
-
-    std::atomic<Node<T>*> head;
-    std::atomic<Node<T>*> tail;
-
+class LockFreeQueue {
 public:
-
     LockFreeQueue();
     ~LockFreeQueue();
 
     void enqueue(Node<T> *node);
     Node<T>* dequeue();
-
+private:
+    std::atomic<Node<T>*> head;
+    std::atomic<Node<T>*> tail;
 };
 
 template<class T>
-LockFreeQueue<T>::LockFreeQueue()
-{
+LockFreeQueue<T>::LockFreeQueue() {
     Node<T> *dummy = new Node<T>( T() );
     dummy->next = nullptr;
     head.store(dummy);
