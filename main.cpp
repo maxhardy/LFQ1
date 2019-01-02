@@ -9,7 +9,7 @@
 using namespace std;
 using namespace chrono;
 
-const int NUM = 1000000;
+const int NUM = 100000000;
 
 void test_lock_free_queue(vector<Node<int>*> data_list){
     cout <<  "1 个生产者与 1 个消费者，测试数据："
